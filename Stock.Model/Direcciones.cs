@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Stock.Model
 {
-    public class Direcciones
+    public class Direcciones : ClaseBase
     {
         public Direcciones()
         {
@@ -23,5 +23,22 @@ namespace Stock.Model
         public string Barrio { get; set; }
         public string Direccion { get; set; }
         public string TipoDireccion { get; set; }
+
+        public override bool Validar()
+        {
+            var EsValido = true;
+
+            if (string.IsNullOrWhiteSpace(Pais))
+            {
+                EsValido = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Departamento))
+            {
+                EsValido = false;
+            }
+
+            return EsValido;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Stock.Model
 {
-    public class Producto
+    public class Producto : ClaseBase
     {
 
         public Producto()
@@ -22,7 +22,7 @@ namespace Stock.Model
         public string Descripcion { get; set; }
         public Decimal? Precio { get; set; }
 
-        public bool Validar()
+        public override bool Validar()
         {
             var EsValido = true;
 
@@ -31,12 +31,17 @@ namespace Stock.Model
                 EsValido = false;
             }
 
-            if (Precio==null)
+            if (Precio == null)
             {
                 EsValido = false;
             }
 
             return EsValido;
+        }
+
+        public override string ToString()
+        {
+            return Nombre;
         }
 
     }

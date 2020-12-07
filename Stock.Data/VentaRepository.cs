@@ -8,11 +8,23 @@ namespace Stock.Data
     public class VentaRepository
     {
 
-        public bool Grabar()
+        public bool Grabar(Venta venta)
         {
-            //codigo para grabar la venta
+            var OperacionRealizadaConExito = true;
 
-            return true;
+            if (venta.Modificado && venta.EsValido)
+            {
+                if (venta.EsNuevo)
+                {
+                    //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+                }
+                else
+                {
+                    //MODIFICA EL REGISTRO EN LA BASE DE DATOS
+                }
+            }
+
+            return OperacionRealizadaConExito;
         }
 
         public Venta Obtener(int Id_Ventas)

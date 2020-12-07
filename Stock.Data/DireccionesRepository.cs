@@ -10,8 +10,21 @@ namespace Stock.Data
 
         public bool Grabar(Direcciones direcciones)
         {
-            //CODIGO QUE GRABA LOS DATOS DE LA DIRECCION EN ALGUNA PARTE YA SEA BASE DE DATOS U OTRA PARTE
-            return true;
+            var OperacionRealizadaConExito = true;
+
+            if (direcciones.Modificado && direcciones.EsValido)
+            {
+                if (direcciones.EsNuevo)
+                {
+                    //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+                }
+                else
+                {
+                    //MODIFICA EL REGISTRO EN LA BASE DE DATOS
+                }
+            }
+
+            return OperacionRealizadaConExito;
         }
 
         public Direcciones Obtener(int Id_Direcciones)

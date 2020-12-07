@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Stock.Model
 {
-    public class Cliente
+    public class Cliente : ClaseBase
     {
         public Cliente()
         {
@@ -64,7 +64,7 @@ namespace Stock.Model
 
         public int TipoDeCliente { get; set; }
 
-        public bool Validar()
+        public override bool Validar()
         {
             var EsValido = true;
 
@@ -79,6 +79,11 @@ namespace Stock.Model
             }
 
             return EsValido;
+        }
+
+        public override string ToString()
+        {
+            return NombreCompleto;
         }
 
     }

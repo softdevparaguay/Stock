@@ -17,8 +17,21 @@ namespace Stock.Data
 
         public bool Grabar(Cliente cliente)
         {
-            //CODIGO QUE GRABA LOS DATOS DEL CLIENE EN ALGUNA PARTE YA SEA BASE DE DATOS U OTRA PARTE
-            return true;
+            var OperacionRealizadaConExito = true;
+
+            if (cliente.Modificado && cliente.EsValido)
+            {
+                if (cliente.EsNuevo)
+                {
+                    //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+                }
+                else
+                {
+                    //MODIFICA EL REGISTRO EN LA BASE DE DATOS
+                }
+            }
+
+            return OperacionRealizadaConExito;
         }
 
         public Cliente Obtener(int Id_Cliente)

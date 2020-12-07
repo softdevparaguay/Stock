@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Stock.Model
 {
-    public class Venta
+    public sealed class Venta : ClaseBase
     {
         public Venta()
         {
@@ -25,7 +25,7 @@ namespace Stock.Model
 
         public List<VentaProducto> VentaProductos { get; set; }
 
-        public bool Validar()
+        public override bool Validar()
         {
             var EsValido = true;
 
@@ -35,6 +35,11 @@ namespace Stock.Model
             }
 
             return EsValido;
+        }
+
+        public override string ToString()
+        {
+            return $"{Fecha.Value.Date} ({Id_Ventas})";
         }
     }
 }

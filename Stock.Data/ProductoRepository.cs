@@ -8,16 +8,35 @@ namespace Stock.Data
     public class ProductoRepository
     {
 
-        public bool Grabar()
+        public bool Grabar(Producto producto)
         {
-            //codigo que graba el producto
+            var OperacionRealizadaConExito = true;
 
-            return true;
+            if (producto.Modificado && producto.EsValido)
+            {
+                if (producto.EsNuevo)
+                {
+                    //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+                }
+                else
+                {
+                    //MODIFICA EL REGISTRO EN LA BASE DE DATOS
+                }
+            }
+
+            return OperacionRealizadaConExito;
         }
 
         public Producto Obtener(int Id_Productos)
         {
             Producto producto = new Producto(Id_Productos);
+
+            object MiObjeto = new object();
+
+
+            Console.WriteLine($"Objeto: {MiObjeto.ToString()}");
+            Console.WriteLine($"Producto: {producto.ToString()}");
+
 
             producto.Nombre = "Iphone 13";
             producto.Descripcion = "Celular Iphone 13";
