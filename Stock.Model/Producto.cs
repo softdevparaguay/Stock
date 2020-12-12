@@ -18,7 +18,18 @@ namespace Stock.Model
         }
 
         public int Id_Productos { get; private set; }
-        public string Nombre { get; set; }
+
+        private string _Nombre;
+        public string Nombre
+        {
+            get 
+            {   
+                return _Nombre; 
+            }
+            set { _Nombre = value; }
+        }
+
+
         public string Descripcion { get; set; }
         public Decimal? Precio { get; set; }
 
@@ -43,6 +54,5 @@ namespace Stock.Model
         {
             return Nombre;
         }
-
     }
 }
