@@ -15,10 +15,8 @@ namespace Stock.ComunTest
             var Origen = "XboxOne";
             var ResultadoEsperado = "Xbox One";
 
-            var Manejador = new ManejoStrings();
-
             //Act
-            var Actual = Manejador.ColocarEspacios(Origen);
+            var Actual = Origen.ColocarEspacios();
 
             //Assert
             Assert.AreEqual(ResultadoEsperado, Actual);
@@ -33,10 +31,8 @@ namespace Stock.ComunTest
             var Origen = "Xbox One";
             var ResultadoEsperado = "Xbox One";
 
-            var Manejador = new ManejoStrings();
-
             //Act
-            var Actual = Manejador.ColocarEspacios(Origen);
+            var Actual = Origen.ColocarEspacios();
 
             //Assert
             Assert.AreEqual(ResultadoEsperado, Actual);

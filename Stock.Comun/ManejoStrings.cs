@@ -2,9 +2,9 @@
 
 namespace Stock.Comun
 {
-    public class ManejoStrings
+    public static class ManejoStrings
     {
-        public string ColocarEspacios(string Origen)
+        public static string ColocarEspacios(this string Origen)
         {
             string Retorno = string.Empty;
 

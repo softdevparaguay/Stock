@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stock.Comun;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,8 +24,8 @@ namespace Stock.Model
         public string Nombre
         {
             get 
-            {   
-                return _Nombre; 
+            {
+                return _Nombre.ColocarEspacios();
             }
             set { _Nombre = value; }
         }
