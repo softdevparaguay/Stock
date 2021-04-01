@@ -64,6 +64,8 @@ namespace Stock.Model
 
         public int TipoDeCliente { get; set; }
 
+        public Vendedor Vendedor { get; set; }
+
         public override bool Validar()
         {
             var EsValido = true;

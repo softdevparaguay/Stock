@@ -6,5 +6,10 @@ namespace Stock.Dto
     {
         public int Id_Clientes { get; set; }
         public string PrimerNombre { get; set; }
+
+        public int Id_Vendedores { get; set; }
+        public string Vendedor { get; set; }
+        public string VendedorTelefono { get; set; }
+        public string VendedorEmail { get; set; }
     }
 }

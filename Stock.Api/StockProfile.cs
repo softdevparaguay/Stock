@@ -12,7 +12,9 @@ namespace Stock.Api
     {
         public StockProfile()
         {
-            CreateMap<Cliente, ClienteDto>();
+            CreateMap<Cliente, ClienteDto>().
+                ForMember(cdto => cdto.Id_Vendedores, o => o.MapFrom(c => c.Vendedor.Id_Vendedores)).
+                ForMember(cdto => cdto.Vendedor, o => o.MapFrom(c => c.Vendedor.Nombre));
         }
     }
 }

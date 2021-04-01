@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Stock.Data;
 using Stock.Dto;
+using Stock.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,23 @@ namespace Stock.Api.Controllers
                 //return BadRequest($"Ocurrió este error: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
             }
+        }
 
+        [HttpGet("{Id_Clientes:int}")]
+        public ActionResult<ClienteDto> Obtener(int Id_Clientes)
+        {
+            try
+            {
+                var Retorno = mapper.Map<ClienteDto>(clienteRepository.Obtener(Id_Clientes));
+
+                if (Retorno == null) return NotFound();
+
+                return Retorno;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
+            }
         }
     }
 }
