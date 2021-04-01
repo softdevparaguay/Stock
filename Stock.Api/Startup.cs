@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Stock.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace Stock.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Stock.Api", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<ClienteRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

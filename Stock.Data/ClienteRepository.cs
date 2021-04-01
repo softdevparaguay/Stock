@@ -51,8 +51,28 @@ namespace Stock.Data
         public List<Cliente> Obtener()
         {
             //CODIGO QUE BUSCA TODOS LOS CLIENTES
+            var Retorno = new List<Cliente>();
 
-            return new List<Cliente>();
+            Cliente cliente1 = new Cliente(1);
+            cliente1.Email = "softdevparaguay@hotmail.com";
+            cliente1.PrimerNombre = "Leonardo";
+            cliente1.PrimerApellido = "Testa";
+
+            Cliente cliente2 = new Cliente(2);
+            cliente2.Email = "raul@hotmail.com";
+            cliente2.PrimerNombre = "Raul";
+            cliente2.PrimerApellido = "Prieto";
+
+            Cliente cliente3 = new Cliente(3);
+            cliente3.Email = "guillermo@hotmail.com";
+            cliente3.PrimerNombre = "Guillermo";
+            cliente3.PrimerApellido = "Riveros";
+
+            Retorno.Add(cliente1);
+            Retorno.Add(cliente2);
+            Retorno.Add(cliente3);
+
+            return Retorno;
         }
     }
 }
