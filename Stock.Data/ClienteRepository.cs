@@ -10,12 +10,8 @@ namespace Stock.Data
     {
         List<Cliente> Listado = new List<Cliente>();
 
-        private DireccionesRepository direccionesRepository { get; set; }
-
         public ClienteRepository()
         {
-            direccionesRepository = new DireccionesRepository();
-
             //Creacion de objetos de ejemplo
 
             Cliente cliente1 = new Cliente(1);
@@ -98,5 +94,23 @@ namespace Stock.Data
             //CODIGO QUE BUSCA TODOS LOS CLIENTES           
             return Listado;
         }
+
+        public Cliente ObtenerSinVendedor(int Id_Cliente)
+        {
+            
+            Cliente clienteConTodosLosDatos = Listado.FirstOrDefault(c => c.Id_Clientes == Id_Cliente);
+            
+            Cliente Retorno = new Cliente(clienteConTodosLosDatos.Id_Clientes);
+            Retorno.PrimerNombre = clienteConTodosLosDatos.PrimerNombre;
+
+            return Retorno;
+        }
+
+        public List<Cliente> ObtenerPorNombre(string Filtro = "")
+        {
+            //CODIGO QUE BUSCA TODOS LOS CLIENTES           
+            return Listado.Where(c => c.PrimerNombre.Contains(Filtro)).ToList() ;
+        }
+
     }
 }

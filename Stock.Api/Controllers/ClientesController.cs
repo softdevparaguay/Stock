@@ -61,11 +61,20 @@ namespace Stock.Api.Controllers
         }
 
         [HttpGet("{Id_Clientes:int}")]
-        public ActionResult<ClienteDto> Obtener(int Id_Clientes)
+        public ActionResult<ClienteDto> Obtener(int Id_Clientes, bool IncluirDatosVendedor = true)
         {
             try
             {
-                var Retorno = mapper.Map<ClienteDto>(clienteRepository.Obtener(Id_Clientes));
+                ClienteDto Retorno = null;
+
+                if (IncluirDatosVendedor)
+                {
+                    Retorno = mapper.Map<ClienteDto>(clienteRepository.Obtener(Id_Clientes));
+                }
+                else
+                {
+                    Retorno = mapper.Map<ClienteDto>(clienteRepository.ObtenerSinVendedor(Id_Clientes));
+                }
 
                 if (Retorno == null) return NotFound();
 
@@ -76,5 +85,25 @@ namespace Stock.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
             }
         }
+
+        [HttpGet("buscarpornombre")]
+        public ActionResult<List<ClienteDto>> ObtenerPorNombre(string Filtro = "")
+        {
+            try
+            {
+                var Listado = clienteRepository.ObtenerPorNombre(Filtro);
+
+                if (!Listado.Any()) return NotFound();
+                
+                return mapper.Map<List<ClienteDto>>(Listado);
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest($"Ocurrió este error: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
+            }
+
+        }
+
     }
 }
