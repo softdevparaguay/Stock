@@ -8,54 +8,54 @@ namespace Stock.Data
 {
     public class ClienteRepository
     {
-        List<Cliente> Listado = new List<Cliente>();
+        static List<Cliente> Listado = new List<Cliente>();
 
         public ClienteRepository()
         {
             //Creacion de objetos de ejemplo
 
-            Cliente cliente1 = new Cliente(1);
-            cliente1.Email = "softdevparaguay@hotmail.com";
-            cliente1.PrimerNombre = "Leonardo";
-            cliente1.PrimerApellido = "Testa";
+            //Cliente cliente1 = new Cliente(1);
+            //cliente1.Email = "softdevparaguay@hotmail.com";
+            //cliente1.PrimerNombre = "Leonardo";
+            //cliente1.PrimerApellido = "Testa";
 
-            Vendedor vendedor1 = new Vendedor(1);
-            vendedor1.Nombre = "Vendedor 1";
-            vendedor1.Telefono = "(0973) 123456";
-            vendedor1.Email = "vendedor1@vendedor.com";
+            //Vendedor vendedor1 = new Vendedor(1);
+            //vendedor1.Nombre = "Vendedor 1";
+            //vendedor1.Telefono = "(0973) 123456";
+            //vendedor1.Email = "vendedor1@vendedor.com";
 
-            cliente1.Vendedor = vendedor1;
+            //cliente1.Vendedor = vendedor1;
 
-            Cliente cliente2 = new Cliente(2);
-            cliente2.Email = "raul@hotmail.com";
-            cliente2.PrimerNombre = "Raul";
-            cliente2.PrimerApellido = "Prieto";
+            //Cliente cliente2 = new Cliente(2);
+            //cliente2.Email = "raul@hotmail.com";
+            //cliente2.PrimerNombre = "Raul";
+            //cliente2.PrimerApellido = "Prieto";
 
-            Vendedor vendedor2 = new Vendedor(2);
-            vendedor2.Nombre = "Vendedor 2";
-            vendedor2.Telefono = "(0973) 456789";
-            vendedor2.Email = "vendedor2@vendedor.com";
+            //Vendedor vendedor2 = new Vendedor(2);
+            //vendedor2.Nombre = "Vendedor 2";
+            //vendedor2.Telefono = "(0973) 456789";
+            //vendedor2.Email = "vendedor2@vendedor.com";
 
-            cliente2.Vendedor = vendedor2;
+            //cliente2.Vendedor = vendedor2;
 
-            Cliente cliente3 = new Cliente(3);
-            cliente3.Email = "guillermo@hotmail.com";
-            cliente3.PrimerNombre = "Guillermo";
-            cliente3.PrimerApellido = "Riveros";
+            //Cliente cliente3 = new Cliente(3);
+            //cliente3.Email = "guillermo@hotmail.com";
+            //cliente3.PrimerNombre = "Guillermo";
+            //cliente3.PrimerApellido = "Riveros";
 
-            Vendedor vendedor3 = new Vendedor(3);
-            vendedor3.Nombre = "Vendedor 3";
-            vendedor3.Telefono = "(0973) 987654";
-            vendedor3.Email = "vendedor3@vendedor.com";
+            //Vendedor vendedor3 = new Vendedor(3);
+            //vendedor3.Nombre = "Vendedor 3";
+            //vendedor3.Telefono = "(0973) 987654";
+            //vendedor3.Email = "vendedor3@vendedor.com";
 
-            cliente3.Vendedor = vendedor3;
+            //cliente3.Vendedor = vendedor3;
 
-            Listado.Add(cliente1);
-            Listado.Add(cliente2);
-            Listado.Add(cliente3);
+            //Listado.Add(cliente1);
+            //Listado.Add(cliente2);
+            //Listado.Add(cliente3);
         }
 
-        public bool Grabar(Cliente cliente)
+        public bool Grabar(ref Cliente cliente)
         {
             var OperacionRealizadaConExito = true;
 
@@ -64,6 +64,14 @@ namespace Stock.Data
                 if (cliente.EsNuevo)
                 {
                     //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+
+                    Cliente clienteCreado = new Cliente(Listado.Count + 1);
+                    clienteCreado.PrimerNombre = cliente.PrimerNombre;
+                    clienteCreado.PrimerApellido = cliente.PrimerApellido;
+
+                    Listado.Add(clienteCreado);                  
+
+                    cliente = clienteCreado;
                 }
                 else
                 {

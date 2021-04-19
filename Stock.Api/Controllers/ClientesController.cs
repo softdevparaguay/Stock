@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Stock.Data;
 using Stock.Dto;
 using Stock.Model;
@@ -12,15 +13,18 @@ using System.Threading.Tasks;
 namespace Stock.Api.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ClientesController : ControllerBase
     {
         private readonly ClienteRepository clienteRepository;
         private readonly IMapper mapper;
+        private readonly LinkGenerator linkGenerator;
 
-        public ClientesController(ClienteRepository clienteRepository, IMapper mapper)
+        public ClientesController(ClienteRepository clienteRepository, IMapper mapper, LinkGenerator linkGenerator)
         {
             this.clienteRepository = clienteRepository;
             this.mapper = mapper;
+            this.linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -94,7 +98,7 @@ namespace Stock.Api.Controllers
                 var Listado = clienteRepository.ObtenerPorNombre(Filtro);
 
                 if (!Listado.Any()) return NotFound();
-                
+
                 return mapper.Map<List<ClienteDto>>(Listado);
             }
             catch (Exception ex)
@@ -102,7 +106,37 @@ namespace Stock.Api.Controllers
                 //return BadRequest($"Ocurrió este error: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
             }
+        }
 
+
+        public ActionResult<ClienteDto> Post(ClienteDto clienteDto)
+        {
+            try
+            {
+                //CREAR NUEVO CLIENTE 
+
+                Cliente cliente = mapper.Map<Cliente>(clienteDto);
+
+                cliente.EsNuevo = true;
+                cliente.Modificado = true;
+
+                clienteRepository.Grabar(ref cliente);
+
+                var DireccionClienteNuevo = linkGenerator.GetPathByAction("Obtener",
+                    "Clientes",
+                    new { Id_Clientes = cliente.Id_Clientes });
+
+                if (string.IsNullOrWhiteSpace(DireccionClienteNuevo))
+                {
+                    return BadRequest("Se necesita un codigo para el cliente");
+                }
+
+                return Created(DireccionClienteNuevo, mapper.Map<ClienteDto>(cliente));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
+            }
         }
 
     }
