@@ -66,6 +66,8 @@ namespace Stock.Model
 
         public Vendedor Vendedor { get; set; }
 
+        public string Cedula { get; set; }
+
         public override bool Validar()
         {
             var EsValido = true;

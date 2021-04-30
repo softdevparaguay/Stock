@@ -115,7 +115,17 @@ namespace Stock.Api.Controllers
             {
                 //CREAR NUEVO CLIENTE 
 
+                if (clienteRepository.ObtenerPorCedula(clienteDto.Cedula) != null)
+                {
+                    return BadRequest("Ya existe un cliente con esa cedula");
+                }
+
                 Cliente cliente = mapper.Map<Cliente>(clienteDto);
+
+                //if (string.IsNullOrWhiteSpace(clienteDto.PrimerNombre))
+                //{
+                //    return BadRequest("El primer nombre es obligatorio");
+                //}
 
                 cliente.EsNuevo = true;
                 cliente.Modificado = true;

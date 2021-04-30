@@ -68,6 +68,7 @@ namespace Stock.Data
                     Cliente clienteCreado = new Cliente(Listado.Count + 1);
                     clienteCreado.PrimerNombre = cliente.PrimerNombre;
                     clienteCreado.PrimerApellido = cliente.PrimerApellido;
+                    clienteCreado.Cedula = cliente.Cedula;
 
                     Listado.Add(clienteCreado);                  
 
@@ -119,6 +120,13 @@ namespace Stock.Data
             //CODIGO QUE BUSCA TODOS LOS CLIENTES           
             return Listado.Where(c => c.PrimerNombre.Contains(Filtro)).ToList() ;
         }
+
+        public Cliente ObtenerPorCedula(string Cedula)
+        {
+            //CODIGO QUE BUSCA TODOS LOS CLIENTES           
+            return Listado.FirstOrDefault(c => c.Cedula == Cedula);
+        }
+
 
     }
 }
