@@ -108,7 +108,7 @@ namespace Stock.Api.Controllers
             }
         }
 
-
+        [HttpPost]
         public ActionResult<ClienteDto> Post(ClienteDto clienteDto)
         {
             try
@@ -142,6 +142,55 @@ namespace Stock.Api.Controllers
                 }
 
                 return Created(DireccionClienteNuevo, mapper.Map<ClienteDto>(cliente));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
+            }
+        }
+
+        [HttpPut("{Id_Clientes}")]
+        public ActionResult<ClienteDto> Put(int Id_Clientes, ClienteDto clienteDto)
+        {
+            try
+            {
+                var clienteParaModificar = clienteRepository.Obtener(Id_Clientes);
+
+                if (clienteParaModificar == null)
+                {
+                    return NotFound($"El cliente con id = {Id_Clientes} no existe");
+                }
+
+                mapper.Map(clienteDto, clienteParaModificar);
+
+                clienteParaModificar = clienteRepository.Modificar(clienteParaModificar);
+
+                return mapper.Map<ClienteDto>(clienteParaModificar);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrió este error: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{Id_Clientes}")]
+        public IActionResult Delete(int Id_Clientes)
+        {
+            try
+            {
+                var clienteParaEliminar = clienteRepository.Obtener(Id_Clientes);
+
+                if (clienteParaEliminar == null)
+                {
+                    return NotFound($"El cliente con id = {Id_Clientes} no existe");
+                }
+
+                //clienteRepository.Eliminar(Id_Clientes);
+                clienteRepository.Eliminar(clienteParaEliminar);
+
+                return Ok();
+
             }
             catch (Exception ex)
             {

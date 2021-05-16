@@ -127,6 +127,26 @@ namespace Stock.Data
             return Listado.FirstOrDefault(c => c.Cedula == Cedula);
         }
 
+        public Cliente Modificar(Cliente cliente)
+        {
+            var clienteParaModificar = Obtener(cliente.Id_Clientes);
 
+            clienteParaModificar.PrimerNombre = cliente.PrimerNombre;
+            clienteParaModificar.PrimerApellido = cliente.PrimerApellido;
+
+            return clienteParaModificar;
+        }
+
+        public void Eliminar(int Id_Clientes)
+        {
+            var clienteParaEliminar = Obtener(Id_Clientes);
+
+            Listado.Remove(clienteParaEliminar);
+        }
+
+        public void Eliminar(Cliente ClienteParaEliminar)
+        {
+            Listado.Remove(ClienteParaEliminar);
+        }
     }
 }
