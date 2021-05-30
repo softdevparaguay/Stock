@@ -1,12 +1,37 @@
 ﻿using Stock.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Stock.Data
 {
     public class VentaRepository
     {
+        static List<Venta> Listado = new List<Venta>();
+
+        public VentaRepository()
+        {
+            if (Listado.Count == 0)
+            {
+                //Creacion de objetos de ejemplo
+                Venta venta1 = new Venta(1);
+                venta1.Fecha = new DateTimeOffset(new DateTime(2021, 5, 23));
+                venta1.Id_Clientes = 1;
+
+                Venta venta2 = new Venta(2);
+                venta2.Fecha = new DateTimeOffset(new DateTime(2021, 4, 22));
+                venta2.Id_Clientes = 2;
+
+                Venta venta3 = new Venta(3);
+                venta3.Fecha = new DateTimeOffset(new DateTime(2021, 3, 21));
+                venta3.Id_Clientes = 1;
+
+                Listado.Add(venta1);
+                Listado.Add(venta2);
+                Listado.Add(venta3);
+            }
+        }
 
         public bool Grabar(Venta venta)
         {
@@ -88,6 +113,17 @@ namespace Stock.Data
             ventaMostrar.ListadoVentaProductoMostrar.Add(ProductoVendido2);
 
             return ventaMostrar;
+        }
+
+        public List<Venta> ObtenerPorId_Clientes(int Id_Clientes)
+        {
+            return Listado.Where(c => c.Id_Clientes == Id_Clientes).ToList();
+        }
+
+        public Venta ObtenerPorId_Clientes(int Id_Clientes, int Id_Ventas)
+        {
+            return Listado.Where(c => c.Id_Clientes == Id_Clientes &&
+                                      c.Id_Ventas == Id_Ventas).FirstOrDefault();
         }
     }
 }

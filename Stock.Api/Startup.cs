@@ -36,6 +36,7 @@ namespace Stock.Api
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<ClienteRepository>();
+            services.AddScoped<VentaRepository>();
 
         }
 
