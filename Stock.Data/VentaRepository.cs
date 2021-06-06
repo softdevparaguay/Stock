@@ -33,7 +33,7 @@ namespace Stock.Data
             }
         }
 
-        public bool Grabar(Venta venta)
+        public bool Grabar(ref Venta venta)
         {
             var OperacionRealizadaConExito = true;
 
@@ -42,6 +42,16 @@ namespace Stock.Data
                 if (venta.EsNuevo)
                 {
                     //GRABA UN REGISTRO NUEVO EN LA BASE DE DATOS
+
+                    Venta VentaCreada = new Venta(Listado.Count + 1);
+                    VentaCreada.Id_Clientes = venta.Id_Clientes;
+                    VentaCreada.DirecionEnvio = venta.DirecionEnvio;
+                    VentaCreada.Fecha = venta.Fecha;
+                    VentaCreada.Id_Direcciones = venta.Id_Direcciones;
+
+                    Listado.Add(VentaCreada);
+
+                    venta = VentaCreada;
                 }
                 else
                 {
